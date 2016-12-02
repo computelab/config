@@ -8,7 +8,7 @@ plugins {
 
 /*** Project ***/
 
-group = 'com.computelab'
+group = 'org.computelab'
 ext.name = 'config'
 version = '0.1.' + (new Date()).format(
         'yyyyMMddHHmm', TimeZone.getTimeZone("UTC"))
@@ -30,7 +30,7 @@ dependencies {
     compile 'com.google.guava:guava:' + guava
     // Logging
     compile 'org.slf4j:slf4j-api:' + slf4j
-    // Test
+    // Testing
     testCompile 'junit:junit:' + junit
     testCompile 'org.mockito:mockito-core:' + mockito
     testRuntime 'ch.qos.logback:logback-core:' + logback
