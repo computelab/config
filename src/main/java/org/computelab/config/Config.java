@@ -25,7 +25,8 @@ public interface Config {
      * Gets the value for the specified key. By default,
      * values are treated as strings.
      *
-     * @throws ConfigEntryMissingException if the key does not exist.
+     * @throws ConfigEntryMissingException if the config entry does not exist
+     *             for the specified key
      */
     String get(String key);
 
