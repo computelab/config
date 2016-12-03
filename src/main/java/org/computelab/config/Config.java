@@ -10,11 +10,6 @@ public interface Config {
     String name();
 
     /**
-     * The application stack this configuration is for.
-     */
-    AppStack stack();
-
-    /**
      * Whether the config entry on the specified key exists.
      * For normal logic flow, check this instead of catching
      * <code>ConfigEntryMissingException</code>.

@@ -17,8 +17,8 @@ final class JsonConfig extends AbstractConfig {
     private final Gson gson = new Gson();
     private final JsonConfigReader configReader;
 
-    JsonConfig(final String name, final AppStack appStack, final String json) {
-        super(name, appStack);
+    JsonConfig(final String name, final String json) {
+        super(name);
         checkNotNull(json);
         checkArgument(!json.isEmpty());
         final JsonObject jsonObject = jsonParser.parse(json).getAsJsonObject();

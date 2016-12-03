@@ -6,24 +6,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 abstract class AbstractConfig implements Config {
 
     private final String name;
-    private final AppStack appStack;
 
-    AbstractConfig(final String name, final AppStack appStack) {
+    AbstractConfig(final String name) {
         checkNotNull(name);
         checkArgument(!name.isEmpty());
-        checkNotNull(appStack);
         this.name = name;
-        this.appStack = appStack;
     }
 
     @Override
     public final String name() {
         return name;
-    }
-
-    @Override
-    public final AppStack stack() {
-        return appStack;
     }
 
     @Override

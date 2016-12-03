@@ -17,14 +17,13 @@ abstract class AbstractListConfig extends AbstractConfig {
 
     private final Pattern splitRegex;
 
-    AbstractListConfig(final String name, final AppStack appStack) {
-        super(name, appStack);
+    AbstractListConfig(final String name) {
+        super(name);
         this.splitRegex = Pattern.compile(DEFAULT_SPLIT_REGEX);
     }
 
-    AbstractListConfig(final String name, final AppStack appStack,
-            final String splitRegex) {
-        super(name, appStack);
+    AbstractListConfig(final String name, final String splitRegex) {
+        super(name);
         checkNotNull(splitRegex);
         checkArgument(!splitRegex.isEmpty());
         this.splitRegex = Pattern.compile(splitRegex);

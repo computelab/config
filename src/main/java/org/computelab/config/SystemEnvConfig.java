@@ -5,13 +5,12 @@ final class SystemEnvConfig extends AbstractListConfig {
     private final ConfigReader<String, String> configReader =
             new SystemEnvConfigReader();
 
-    SystemEnvConfig(final String name, final AppStack appStack) {
-        super(name, appStack);
+    SystemEnvConfig(final String name) {
+        super(name);
     }
 
-    SystemEnvConfig(final String name, final AppStack appStack,
-            final String splitRegex) {
-        super(name, appStack, splitRegex);
+    SystemEnvConfig(final String name, final String splitRegex) {
+        super(name, splitRegex);
     }
 
     @Override
