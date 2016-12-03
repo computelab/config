@@ -5,13 +5,12 @@ final class SystemPropertyConfig extends AbstractListConfig {
     private final ConfigReader<String, String> configReader =
             new SystemPropertyConfigReader();
 
-    SystemPropertyConfig(final String name, final AppStack appStack) {
-        super(name, appStack);
+    SystemPropertyConfig(final String name) {
+        super(name);
     }
 
-    SystemPropertyConfig(final String name, final AppStack appStack,
-            final String splitRegex) {
-        super(name, appStack, splitRegex);
+    SystemPropertyConfig(final String name, final String splitRegex) {
+        super(name, splitRegex);
     }
 
     @Override

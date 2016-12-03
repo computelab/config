@@ -8,16 +8,15 @@ final class PropertiesConfig extends AbstractListConfig {
 
     private final ConfigReader<String, String> configReader;
 
-    PropertiesConfig(final String name, final AppStack appStack,
-            final Properties properties) {
-        super(name, appStack);
+    PropertiesConfig(final String name, final Properties properties) {
+        super(name);
         checkNotNull(properties);
         configReader = new PropertiesConfigReader(properties);
     }
 
-    PropertiesConfig(final String name, final AppStack appStack,
-            final Properties properties, final String splitRegex) {
-        super(name, appStack, splitRegex);
+    PropertiesConfig(final String name, final Properties properties,
+            final String splitRegex) {
+        super(name, splitRegex);
         checkNotNull(properties);
         configReader = new PropertiesConfigReader(properties);
     }

@@ -10,9 +10,8 @@ final class FusedConfig extends AbstractConfig {
 
     private final List<Config> configs;
 
-    FusedConfig(final String name, final AppStack appStack,
-            final List<Config> configs) {
-        super(name, appStack);
+    FusedConfig(final String name, final List<Config> configs) {
+        super(name);
         checkNotNull(configs);
         checkArgument(configs.size() > 0);
         this.configs = Collections.unmodifiableList(configs);
