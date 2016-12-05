@@ -10,6 +10,12 @@ import org.junit.Test;
 
 public class AbstractConfigTest {
 
+    @Test
+    public void name() {
+        Config config = mockConstructor("name");
+        assertEquals("name", config.name());
+    }
+
     @Test(expected=NullPointerException.class)
     public void nameCannotBeNull() {
         mockConstructor(null);
@@ -65,6 +71,18 @@ public class AbstractConfigTest {
     public void getAsLongNumberFormatException() {
         Config config = mockGet("NotAnInteger");
         config.getAsLong("anyKey");
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void getKeyCannotBeNull() {
+        Config config = mockGet("9");
+        config.getAsLong(null);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void getKeyCannotBeEmpty() {
+        Config config = mockGet("9");
+        config.getAsLong("");
     }
 
     private Config mockConstructor(String name) {
