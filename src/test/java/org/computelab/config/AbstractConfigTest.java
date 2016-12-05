@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class AbstractConfigTest {
 
+    @Test
     public void name() {
         Config config = mockConstructor("name");
         assertEquals("name", config.name());
