@@ -5,7 +5,7 @@
 
 Configuration in plain Java.
 
-1. Overlaid configuration
+### Overlaid configuration
 
 Configuration can be defined in many places. Can be passed on command-line as
 system properties. Can be read from environment variables. Can be read from
@@ -18,15 +18,20 @@ Environment variables and system properties, are for deployed.
 
 Stacked together. [Example]
 
-2. Comma-delimited key
+### Comma-delimited key
 
 Can be read flattened from Java properties.
 The same key can be read as JSON path. This is handled transparently.
 
 [Example here]
 
-3. DefaultConfig
+### DefaultConfig
 
-4. ConfigBuilder
+### ConfigBuilder
 
-5. Light-weight ConfigReader
+### Light-weight ConfigReader
+
+### Design Principles
+
+1. No annotations
+2. Miniml dependencies. For example, we do not expose any Gson objects on the interface. Instead they are wrapped in and handled transparently for you.
