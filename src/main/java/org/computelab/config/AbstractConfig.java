@@ -3,6 +3,10 @@ package org.computelab.config;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Takes care of setting the name and the <code>getAs...()</code>
+ * parsings.
+ */
 abstract class AbstractConfig implements Config {
 
     private final String name;
