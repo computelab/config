@@ -26,22 +26,31 @@ public interface Config {
     String get(String key);
 
     /**
-     * Gets the config value as an immutable list.
+     * Gets the config value as an immutable list. Leading and trailing
+     * whitespace will be trimmed off the values. Blank values will be
+     * filtered from the list.
      */
     List<String> getAsList(String key);
 
     /**
-     * Gets the config value as a boolean.
+     * Gets the config value as a boolean. Note that this is consistent
+     * with <code>Boolean.parseBoolean(String)</code> in that only
+     * "true" ignoring case parses as <code>true</code>. Everything
+     * else parses as <code>false</code>.
      */
     boolean getAsBoolean(String key);
 
     /**
      * Gets the config value as an integer.
+     *
+     * @throws NumberFormatException if the value is not a valid integer
      */
     int getAsInt(String key);
 
     /**
      * Gets the config value as a long integer.
+     *
+     * @throws NumberFormatException if the value is not a valid integer
      */
     long getAsLong(String key);
 }

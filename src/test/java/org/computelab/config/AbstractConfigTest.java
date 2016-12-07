@@ -97,7 +97,7 @@ public class AbstractConfigTest {
         return new AbstractConfig(name) {
             @Override
             public boolean has(String key) {
-                return false;
+                return get != null;
             }
             @Override
             public String get(String key) {
