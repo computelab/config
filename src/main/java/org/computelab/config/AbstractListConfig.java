@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Parses a regex delimited value list.
@@ -32,10 +31,7 @@ abstract class AbstractListConfig extends AbstractConfig {
 
     @Override
     public final List<String> getAsList(String key) {
-        return Collections.unmodifiableList(
-                Arrays.asList(splitRegex.split(get(key))).stream()
-                .map(val -> val.trim())
-                .filter(val -> val.length() > 0)
-                .collect(Collectors.toList()));
+        return Collections.unmodifiableList(StringUtils.trim(
+                Arrays.asList(splitRegex.split(get(key)))));
     }
 }

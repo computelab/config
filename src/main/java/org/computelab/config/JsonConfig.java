@@ -37,7 +37,7 @@ final class JsonConfig extends AbstractConfig {
 
     @Override
     public List<String> getAsList(final String key) {
-        return Collections.unmodifiableList(Arrays.asList(
-                gson.fromJson(configReader.get(key).value(), String[].class)));
+        return Collections.unmodifiableList(StringUtils.trim(Arrays.asList(
+                gson.fromJson(configReader.get(key).value(), String[].class))));
     }
 }
