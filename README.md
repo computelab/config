@@ -35,3 +35,5 @@ The same key can be read as JSON path. This is handled transparently.
 
 1. No annotations
 2. Miniml dependencies. For example, we do not expose any Gson objects on the interface. Instead they are wrapped in and handled transparently for you.
+3. Stateless. We do not store any config data. It is a reader -- every call reads realtime data.
+4. No nulls. Two options are provided. You can either check a boolean flag or catch `ConfigEntryMissingException`.
