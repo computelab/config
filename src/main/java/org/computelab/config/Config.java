@@ -26,7 +26,9 @@ public interface Config {
     String get(String key);
 
     /**
-     * Gets the config value as an immutable list.
+     * Gets the config value as an immutable list. Leading and trailing
+     * whitespace will be trimmed off the values. Blank values will be
+     * filtered from the list.
      */
     List<String> getAsList(String key);
 
