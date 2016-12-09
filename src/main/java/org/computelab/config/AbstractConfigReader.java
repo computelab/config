@@ -9,7 +9,8 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
     public ConfigEntry<String, T> get(final String key) {
         checkNotNull(key);
         checkArgument(!key.isEmpty());
-        if (!hasKey(key)) {
+        final T val = getVal(key);
+        if (val == null) {
             throw new ConfigEntryMissingException(key);
         }
         return new ConfigEntry<String, T>() {
@@ -19,7 +20,7 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
             }
             @Override
             public T value() {
-                return getVal(key);
+                return val;
             }
         };
     }
@@ -27,15 +28,8 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
     @Override
     public boolean has(final String key) {
         checkNotNull(key);
-        return hasKey(key);
+        return getVal(key) != null;
     }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    abstract boolean hasKey(String key);
 
     /**
      * The value for the specified key; or null if not exist
