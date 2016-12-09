@@ -27,6 +27,13 @@ The same key can be read as JSON path. This is handled transparently.
 
 ### DefaultConfig
 
+##### Usage Patterns
+
+1. Write your own Config with the list of keys. To reduce the chance of errors and get intellisense on editors.
+2. Check keys on loading so that errors are discovered quickly.
+3. Cache the values and add a reload() method if necessary.
+4. Load config remotely.
+
 ### ConfigBuilder
 
 ### Light-weight ConfigReader
@@ -35,5 +42,5 @@ The same key can be read as JSON path. This is handled transparently.
 
 1. No annotations
 2. Miniml dependencies. For example, we do not expose any Gson objects on the interface. Instead they are wrapped in and handled transparently for you.
-3. Stateless. We do not store any config data. It is a reader -- every call reads realtime data.
+3. Stateless. We do not store any config data. It is a reader -- every call reads realtime data. That opens up the possibility of changing config at runtime.
 4. No nulls. Two options are provided. You can either check a boolean flag or catch `ConfigEntryMissingException`.
