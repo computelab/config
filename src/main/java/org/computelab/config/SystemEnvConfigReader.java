@@ -6,11 +6,6 @@ import static org.computelab.config.ConfigConstants.KEY_DELIMITER;
 final class SystemEnvConfigReader extends AbstractConfigReader<String> {
 
     @Override
-    boolean hasKey(final String key) {
-        return getVal(key) != null;
-    }
-
-    @Override
     String getVal(final String key) {
         return System.getenv(convert(key));
     }

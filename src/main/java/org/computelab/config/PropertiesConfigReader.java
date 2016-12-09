@@ -15,11 +15,6 @@ final class PropertiesConfigReader extends AbstractConfigReader<String> {
     }
 
     @Override
-    boolean hasKey(final String key) {
-        return properties.containsKey(key);
-    }
-
-    @Override
     String getVal(final String key) {
         return properties.getProperty(key);
     }
