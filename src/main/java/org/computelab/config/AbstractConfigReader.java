@@ -28,6 +28,7 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
     @Override
     public boolean has(final String key) {
         checkNotNull(key);
+        checkArgument(!key.isEmpty());
         return getVal(key) != null;
     }
 
