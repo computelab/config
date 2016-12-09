@@ -18,15 +18,16 @@ final class JsonConfigReader extends AbstractConfigReader<JsonElement> {
     }
 
     @Override
-    boolean hasKey(final String key) {
+    JsonElement getVal(final String key) {
         final Queue<String> keys = splitKey(key);
         final JsonElement jsonElement = search(keys, json);
-        return keys.isEmpty() && !jsonElement.isJsonNull();
-    }
-
-    @Override
-    JsonElement getVal(final String key) {
-        return search(splitKey(key), json);
+        if (!keys.isEmpty()) {
+            return null;
+        }
+        if (jsonElement.isJsonNull()) {
+            return null;
+        }
+        return jsonElement;
     }
 
     private JsonElement search(final Queue<String> keys, final JsonObject jsonObject) {
