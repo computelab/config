@@ -1,19 +1,19 @@
 {
   "sp": {
     "provider": {
-      "id": "123",
+      "id": 123,
       "secret": "abc",
-      "url": ""
+      "urls": ["url1", "url2"]
     },
     "researcher": {
-      "id": "567",
+      "id": 567,
       "secret": "efg",
-      "url": ""
+      "urls": [""]
     },
     "participant": {
-      "id": "890",
+      "id": 890,
       "secret": "uvw",
-      "url": ""
+      "urls": [""]
     }
   }
 }
