@@ -1,5 +1,7 @@
 package org.computelab.config;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Queue;
@@ -14,6 +16,7 @@ final class JsonConfigReader extends AbstractConfigReader<JsonElement> {
     private final JsonObject json;
 
     JsonConfigReader(final JsonObject json) {
+        checkNotNull(json);
         this.json = json;
     }
 
@@ -21,21 +24,34 @@ final class JsonConfigReader extends AbstractConfigReader<JsonElement> {
     JsonElement getVal(final String key) {
         final Queue<String> keys = splitKey(key);
         final JsonElement jsonElement = search(keys, json);
+        // Key does not exist
         if (!keys.isEmpty()) {
             return null;
         }
+        if (jsonElement == null) {
+            return null;
+        }
+        // Cannot call getAsString() on JsonNull
+        // Thus JsonNull is treated as null
         if (jsonElement.isJsonNull()) {
             return null;
         }
         return jsonElement;
     }
 
+    /**
+     * Recursively searches the JSON object until the keys are exhausted,
+     * or the key does not exist, or a terminal JSON element is found.
+     */
     private JsonElement search(final Queue<String> keys, final JsonObject jsonObject) {
         if (keys.isEmpty()) {
             return jsonObject;
         }
         final String key = keys.poll();
         final JsonElement jsonElement = jsonObject.get(key);
+        if (jsonElement == null) {
+            return null;
+        }
         if (!jsonElement.isJsonObject()) {
             return jsonElement;
         }
