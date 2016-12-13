@@ -1,5 +1,7 @@
 package org.computelab.config;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Properties;
 
 final class PropertiesConfigReader extends AbstractConfigReader<String> {
@@ -7,6 +9,7 @@ final class PropertiesConfigReader extends AbstractConfigReader<String> {
     private final Properties properties;
 
     PropertiesConfigReader(final Properties properties) {
+        checkNotNull(properties);
         // Make a defensive copy
         this.properties = new Properties();
         for (String key : properties.stringPropertyNames()) {
