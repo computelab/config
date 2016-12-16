@@ -18,8 +18,7 @@ abstract class AbstractListConfig extends AbstractConfig {
     private final Pattern splitRegex;
 
     AbstractListConfig(final String name) {
-        super(name);
-        this.splitRegex = Pattern.compile(DEFAULT_SPLIT_REGEX);
+        this(name, DEFAULT_SPLIT_REGEX);
     }
 
     AbstractListConfig(final String name, final String splitRegex) {
