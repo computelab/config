@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 
 final class JsonConfig extends AbstractConfig {
@@ -21,8 +22,14 @@ final class JsonConfig extends AbstractConfig {
         super(name);
         checkNotNull(json);
         checkArgument(!json.isEmpty());
-        final JsonObject jsonObject = jsonParser.parse(json).getAsJsonObject();
-        configReader = new JsonConfigReader(jsonObject);
+        try {
+            final JsonObject jsonObj = jsonParser.parse(json).getAsJsonObject();
+            configReader = new JsonConfigReader(jsonObj);
+        } catch (final JsonParseException ex) {
+            throw new InvalidJsonException(json, ex);
+        } catch (final IllegalStateException ex) {
+            throw new UnexpectedJsonTypeException(json, ex);
+        }
     }
 
     @Override
