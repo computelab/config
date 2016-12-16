@@ -3,7 +3,7 @@
     "provider": {
       "id": 123,
       "secret": "abc",
-      "urls": ["url1", "url2"]
+      "urls": ["url1", "url2", " "]
     },
     "researcher": {
       "id": 567,
