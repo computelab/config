@@ -92,7 +92,7 @@ public class JsonConfigReaderTest {
     public void testJsonArray() {
         JsonConfigReader reader = new JsonConfigReader(json);
         assertTrue(reader.getVal("sp.provider.urls").isJsonArray());
-        assertEquals(parser.parse("[\"url1\",\"url2\"]"),
+        assertEquals(parser.parse("[\"url1\",\"url2\", \" \"]"),
                 reader.getVal("sp.provider.urls"));
     }
 }
