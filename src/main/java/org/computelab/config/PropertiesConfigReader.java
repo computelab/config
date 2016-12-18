@@ -9,7 +9,7 @@ final class PropertiesConfigReader extends AbstractConfigReader<String> {
     private final Properties properties;
 
     PropertiesConfigReader(final Properties properties) {
-        checkNotNull(properties);
+        checkNotNull(properties, "Properties must not be null.");
         // Make a defensive copy
         this.properties = new Properties();
         for (String key : properties.stringPropertyNames()) {

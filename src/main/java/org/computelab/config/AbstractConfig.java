@@ -12,8 +12,8 @@ abstract class AbstractConfig implements Config {
     private final String name;
 
     AbstractConfig(final String name) {
-        checkNotNull(name);
-        checkArgument(!name.isEmpty());
+        checkNotNull(name, "Config name must not be null.");
+        checkArgument(!name.isEmpty(), "Config name must not be empty.");
         this.name = name;
     }
 
@@ -43,8 +43,8 @@ abstract class AbstractConfig implements Config {
     }
 
     private <T> T getAsType(String key, Parse<T> parse) {
-        checkNotNull(key);
-        checkArgument(!key.isEmpty());
+        checkNotNull(key, "Key for the config entry must not be null.");
+        checkArgument(!key.isEmpty(), "Key for the config entry must not be empty.");
         return parse.apply(get(key));
     }
 }

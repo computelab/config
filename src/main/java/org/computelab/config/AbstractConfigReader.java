@@ -7,8 +7,7 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
 
     @Override
     public ConfigEntry<String, T> get(final String key) {
-        checkNotNull(key);
-        checkArgument(!key.isEmpty());
+        validateKey(key);
         final T val = getVal(key);
         if (val == null) {
             throw new ConfigEntryMissingException(key);
@@ -27,8 +26,7 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
 
     @Override
     public boolean has(final String key) {
-        checkNotNull(key);
-        checkArgument(!key.isEmpty());
+        validateKey(key);
         return getVal(key) != null;
     }
 
@@ -36,4 +34,9 @@ abstract class AbstractConfigReader<T> implements ConfigReader<String, T>  {
      * The value for the specified key; or null if not exist
      */
     abstract T getVal(String key);
+
+    private void validateKey(final String key) {
+        checkNotNull(key, "Key for the config entry must not be null.");
+        checkArgument(!key.isEmpty(), "Key for the config entry must not be empty.");
+    }
 }

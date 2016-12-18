@@ -20,8 +20,8 @@ final class JsonConfig extends AbstractConfig {
 
     JsonConfig(final String name, final String json) {
         super(name);
-        checkNotNull(json);
-        checkArgument(!json.isEmpty());
+        checkNotNull(json, "JSON string must not be null.");
+        checkArgument(!json.isEmpty(), "JSON string must not be empty.");
         try {
             final JsonObject jsonObj = jsonParser.parse(json).getAsJsonObject();
             configReader = new JsonConfigReader(jsonObj);

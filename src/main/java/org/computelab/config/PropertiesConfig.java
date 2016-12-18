@@ -10,14 +10,14 @@ final class PropertiesConfig extends AbstractListConfig {
 
     PropertiesConfig(final String name, final Properties properties) {
         super(name);
-        checkNotNull(properties);
+        checkNotNull(properties, "Properties must not be null.");
         configReader = new PropertiesConfigReader(properties);
     }
 
     PropertiesConfig(final String name, final Properties properties,
             final String splitRegex) {
         super(name, splitRegex);
-        checkNotNull(properties);
+        checkNotNull(properties, "Properties must not be null.");
         configReader = new PropertiesConfigReader(properties);
     }
 
