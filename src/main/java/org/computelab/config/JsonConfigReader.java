@@ -16,7 +16,7 @@ final class JsonConfigReader extends AbstractConfigReader<JsonElement> {
     private final JsonObject json;
 
     JsonConfigReader(final JsonObject json) {
-        checkNotNull(json);
+        checkNotNull(json, "JSON object must not be null.");
         this.json = json;
     }
 

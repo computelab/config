@@ -23,8 +23,8 @@ abstract class AbstractListConfig extends AbstractConfig {
 
     AbstractListConfig(final String name, final String splitRegex) {
         super(name);
-        checkNotNull(splitRegex);
-        checkArgument(!splitRegex.isEmpty());
+        checkNotNull(splitRegex, "Split regex must not be null.");
+        checkArgument(!splitRegex.isEmpty(), "Split regex must not be empty.");
         this.splitRegex = Pattern.compile(splitRegex);
     }
 
