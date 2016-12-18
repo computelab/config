@@ -42,4 +42,11 @@ public class PropertiesConfigReaderTest {
         PropertiesConfigReader reader = new PropertiesConfigReader(properties);
         assertNull(reader.getVal("sp.researcher.key"));
     }
+
+    @Test
+    public void emptyPropertiesAreAllowed() {
+        PropertiesConfigReader reader = new PropertiesConfigReader(
+                new Properties());
+        assertNull(reader.getVal("sp.researcher.id"));
+    }
 }
