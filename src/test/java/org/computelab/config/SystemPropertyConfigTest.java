@@ -13,11 +13,26 @@ public class SystemPropertyConfigTest {
     @Before
     public void before() {
         System.setProperty(getKey(), "123abc");
+        System.setProperty(getKey() + "List", "1, 2, 3");
     }
 
     @After
     public void after() {
         System.clearProperty(getKey());
+        System.clearProperty(getKey() + "List");
+    }
+
+    @Test
+    public void testConstructor1() {
+        Config config = new SystemPropertyConfig("name");
+        assertEquals("name", config.name());
+    }
+
+    @Test
+    public void testConstructor2() {
+        Config config = new SystemPropertyConfig("name", "\\s*,\\s*");
+        assertEquals("name", config.name());
+        assertEquals(3, config.getAsList(getKey() + "List").size());
     }
 
     @Test
