@@ -12,6 +12,20 @@ public class SystemEnvConfigTest {
     @Before
     public void before() throws Exception {
         SystemEnvUtil.setEnv(getKey(), "123abc");
+        SystemEnvUtil.setEnv("LIST_" + getKey(), "a,b,c");
+    }
+
+    @Test
+    public void testConstructor1() {
+        Config config = new SystemEnvConfig("name");
+        assertEquals("name", config.name());
+    }
+
+    @Test
+    public void testConstructor2() {
+        Config config = new SystemEnvConfig("name", "\\s*,\\s*");
+        assertEquals("name", config.name());
+        assertEquals(3, config.getAsList("LIST_" + getKey()).size());
     }
 
     @Test

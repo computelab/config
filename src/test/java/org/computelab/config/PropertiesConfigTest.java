@@ -24,6 +24,19 @@ public class PropertiesConfigTest {
         }
     }
 
+    @Test
+    public void testConstructor1() {
+        Config config = new PropertiesConfig("name", properties);
+        assertEquals("name", config.name());
+    }
+
+    @Test
+    public void testConstructor2() {
+        Config config = new PropertiesConfig("name", properties, "\\s*,\\s*");
+        assertEquals("name", config.name());
+        assertEquals(2, config.getAsList("sp.provider.urls").size());
+    }
+
     @Test(expected = NullPointerException.class)
     public void constructorPropertiesCannotBeNull1() {
         new PropertiesConfig("name", null);
