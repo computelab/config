@@ -79,10 +79,10 @@ public final class ConfigBuilder {
     }
 
     public Config build() {
-        return new FusedConfig(FusedConfig.class.getSimpleName(), configs);
+        return new StackedConfig(StackedConfig.class.getSimpleName(), configs);
     }
 
     public Config build(final String configName) {
-        return new FusedConfig(configName, configs);
+        return new StackedConfig(configName, configs);
     }
 }
