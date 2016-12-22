@@ -6,11 +6,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Collections;
 import java.util.List;
 
-final class FusedConfig extends AbstractConfig {
+final class StackedConfig extends AbstractConfig {
 
     private final List<Config> configs;
 
-    FusedConfig(final String name, final List<Config> configs) {
+    StackedConfig(final String name, final List<Config> configs) {
         super(name);
         checkNotNull(configs);
         checkArgument(configs.size() > 0);
