@@ -9,9 +9,7 @@ public final class ConfigBuilder {
     private final List<Config> configs = new ArrayList<>();
 
     public ConfigBuilder addJsonConfig(final String json) {
-        final String configName = JsonConfig.class.getSimpleName();
-        configs.add(new JsonConfig(configName, json));
-        return this;
+        return addJsonConfig(JsonConfig.class.getSimpleName(), json);
     }
 
     public ConfigBuilder addJsonConfig(final String configName, final String json) {
@@ -20,34 +18,24 @@ public final class ConfigBuilder {
     }
 
     public ConfigBuilder addPropertiesConfig(final Properties properties) {
-        final String configName = PropertiesConfig.class.getSimpleName();
+        return addPropertiesConfig(PropertiesConfig.class.getSimpleName(), properties);
+    }
+
+    public ConfigBuilder addPropertiesConfig(final String configName, final Properties properties) {
         configs.add(new PropertiesConfig(configName, properties));
         return this;
     }
 
-    public ConfigBuilder addPropertiesConfig(final String configName,
-            final Properties properties) {
-        configs.add(new PropertiesConfig(configName, properties));
-        return this;
-    }
-
-    public ConfigBuilder addPropertiesConfig(final Properties properties,
+    public ConfigBuilder addPropertiesConfig(
+            final String configName,
+            final Properties properties,
             final String splitRegex) {
-        final String configName = PropertiesConfig.class.getSimpleName();
-        configs.add(new PropertiesConfig(configName, properties, splitRegex));
-        return this;
-    }
-
-    public ConfigBuilder addPropertiesConfig(final String configName,
-            final Properties properties, final String splitRegex) {
         configs.add(new PropertiesConfig(configName, properties, splitRegex));
         return this;
     }
 
     public ConfigBuilder addSystemEnvConfig() {
-        final String configName = SystemEnvConfig.class.getSimpleName();
-        configs.add(new SystemEnvConfig(configName));
-        return this;
+        return addSystemEnvConfig(SystemEnvConfig.class.getSimpleName());
     }
 
     public ConfigBuilder addSystemEnvConfig(final String configName) {
@@ -55,16 +43,13 @@ public final class ConfigBuilder {
         return this;
     }
 
-    public ConfigBuilder addSystemEnvConfig(final String configName,
-            final String splitRegex) {
+    public ConfigBuilder addSystemEnvConfig(final String configName, final String splitRegex) {
         configs.add(new SystemEnvConfig(configName, splitRegex));
         return this;
     }
 
     public ConfigBuilder addSystemPropertyConfig() {
-        final String configName = SystemPropertyConfig.class.getSimpleName();
-        configs.add(new SystemPropertyConfig(configName));
-        return this;
+        return addSystemPropertyConfig(SystemPropertyConfig.class.getSimpleName());
     }
 
     public ConfigBuilder addSystemPropertyConfig(final String configName) {
@@ -72,8 +57,7 @@ public final class ConfigBuilder {
         return this;
     }
 
-    public ConfigBuilder addSystemPropertyConfig(final String configName,
-            final String splitRegex) {
+    public ConfigBuilder addSystemPropertyConfig(final String configName, final String splitRegex) {
         configs.add(new SystemPropertyConfig(configName, splitRegex));
         return this;
     }
