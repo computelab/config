@@ -61,8 +61,13 @@ public class StackedConfigTest {
     }
 
     @Test(expected=ConfigEntryMissingException.class)
-    public void testKeyNotExist() {
+    public void getThrowsExceptionWhenKeyNotExist() {
         config.get("key4");
+    }
+
+    @Test(expected=ConfigEntryMissingException.class)
+    public void getAsListThrowsExceptionWhenKeyNotExist() {
+        config.getAsList("key4");
     }
 
     @Test(expected=NullPointerException.class)
