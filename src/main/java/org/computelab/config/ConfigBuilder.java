@@ -63,7 +63,7 @@ public final class ConfigBuilder {
     }
 
     public Config build() {
-        return new StackedConfig(StackedConfig.class.getSimpleName(), configs);
+        return build(StackedConfig.class.getSimpleName());
     }
 
     public Config build(final String configName) {
