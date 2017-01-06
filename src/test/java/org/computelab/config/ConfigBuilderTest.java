@@ -11,7 +11,7 @@ public class ConfigBuilderTest {
         ConfigBuilder builder = new ConfigBuilder();
         builder.addJsonConfig("{}");
         Config config = builder.build();
-        assertEquals(StackedConfig.class.getSimpleName(), config.name());
+        assertEquals(ConfigChain.class.getSimpleName(), config.name());
     }
 
     @Test
