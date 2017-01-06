@@ -47,7 +47,7 @@ public class DefaultConfigBuilderTest {
         final String appName = getClass().getSimpleName();
         final DefaultConfigBuilder builder = new DefaultConfigBuilder(appName);
         final Config config = builder.build();
-        assertTrue(config instanceof StackedConfig);
+        assertTrue(config instanceof ConfigChain);
         final List<Config> configs = (List<Config>)FieldUtils.readField(config, "configs", true);
         assertNotNull(configs);
         assertEquals(2, configs.size());

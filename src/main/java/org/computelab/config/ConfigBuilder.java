@@ -7,6 +7,8 @@ import java.util.Properties;
 import com.google.common.collect.ImmutableList;
 
 /**
+ * Builds a custom chain of configs.
+ * <p>
  * Note this builder is not thread-safe.
  */
 public final class ConfigBuilder {
@@ -68,10 +70,10 @@ public final class ConfigBuilder {
     }
 
     public Config build() {
-        return build(StackedConfig.class.getSimpleName());
+        return build(ConfigChain.class.getSimpleName());
     }
 
     public Config build(final String configName) {
-        return new StackedConfig(configName, ImmutableList.copyOf(configs));
+        return new ConfigChain(configName, ImmutableList.copyOf(configs));
     }
 }
