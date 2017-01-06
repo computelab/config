@@ -33,6 +33,7 @@ dependencies {
     // Testing
     testCompile 'junit:junit:' + junit
     testCompile 'org.mockito:mockito-core:' + mockito
+    testCompile 'org.apache.commons:commons-lang3:' + commons
     testRuntime 'ch.qos.logback:logback-core:' + logback
     testRuntime 'ch.qos.logback:logback-classic:' + logback
 }
