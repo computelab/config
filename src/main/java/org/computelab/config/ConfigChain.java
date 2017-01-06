@@ -9,18 +9,24 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-final class StackedConfig extends AbstractConfig {
+/**
+ * A chain of configs. When reading value for a key, the first config
+ * in the chain is consulted first. If the key exists, the value is
+ * returned; otherwise the config next in the chain is consulted. So
+ * on and so forth until the end of the chain is reached.
+ */
+final class ConfigChain extends AbstractConfig {
 
-    private final Logger logger = LoggerFactory.getLogger(StackedConfig.class);
+    private final Logger logger = LoggerFactory.getLogger(ConfigChain.class);
 
     private final List<Config> configs;
 
-    StackedConfig(final String name, final List<Config> configs) {
+    ConfigChain(final String name, final List<Config> configs) {
         super(name);
         checkNotNull(configs);
         checkArgument(configs.size() > 0);
         this.configs = configs;
-        logger.info("Stacking configs [" + String.join(", ",
+        logger.info("[" + String.join(", ",
                 this.configs.stream().map(
                         config -> config.name()
                 ).collect(Collectors.toList())) + "]");

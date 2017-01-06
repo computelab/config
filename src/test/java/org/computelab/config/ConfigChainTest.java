@@ -12,9 +12,9 @@ import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StackedConfigTest {
+public class ConfigChainTest {
 
-    private StackedConfig config;
+    private ConfigChain configChain;
 
     @Before
     public void before() {
@@ -27,32 +27,32 @@ public class StackedConfigTest {
         midProps.put("key3", "mid3");
         midProps.put("list", "a,b,c");
         final Config midConfig = new PropertiesConfig("mid", midProps);
-        config = new StackedConfig(getClass().getSimpleName(),
+        configChain = new ConfigChain(getClass().getSimpleName(),
                 Arrays.asList(topConfig, midConfig));
     }
 
     @Test
     public void shouldNotFallbackWhenTopExists() {
-        assertEquals("top1", config.get("key1"));
-        assertEquals("top2", config.get("key2"));
+        assertEquals("top1", configChain.get("key1"));
+        assertEquals("top2", configChain.get("key2"));
     }
 
     @Test
     public void shouldFallbackWhenTopMissing() {
-        assertEquals("mid3", config.get("key3"));
+        assertEquals("mid3", configChain.get("key3"));
     }
 
     @Test
     public void testHas() {
-        assertTrue(config.has("key1"));
-        assertTrue(config.has("key2"));
-        assertTrue(config.has("key3"));
-        assertFalse(config.has("key4"));
+        assertTrue(configChain.has("key1"));
+        assertTrue(configChain.has("key2"));
+        assertTrue(configChain.has("key3"));
+        assertFalse(configChain.has("key4"));
     }
 
     @Test
     public void testGetList() {
-        List<String> list = config.getAsList("list");
+        List<String> list = configChain.getAsList("list");
         assertNotNull(list);
         assertEquals(3, list.size());
         assertEquals("a", list.get(0));
@@ -62,22 +62,22 @@ public class StackedConfigTest {
 
     @Test(expected=ConfigEntryMissingException.class)
     public void getThrowsExceptionWhenKeyNotExist() {
-        config.get("key4");
+        configChain.get("key4");
     }
 
     @Test(expected=ConfigEntryMissingException.class)
     public void getAsListThrowsExceptionWhenKeyNotExist() {
-        config.getAsList("key4");
+        configChain.getAsList("key4");
     }
 
     @Test(expected=NullPointerException.class)
     public void constructorConfigsCannotBeNull() {
-        new StackedConfig(getClass().getSimpleName(), null);
+        new ConfigChain(getClass().getSimpleName(), null);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void constructorConfigsCannotBeEmpty() {
-        new StackedConfig(getClass().getSimpleName(),
+        new ConfigChain(getClass().getSimpleName(),
                 Arrays.asList());
     }
 }
