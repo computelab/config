@@ -3,8 +3,9 @@ package org.computelab.config;
 /**
  * Exception when an expected entry is missing the config.
  */
-@SuppressWarnings("serial")
-public final class ConfigEntryMissingException extends RuntimeException{
+public final class ConfigEntryMissingException extends RuntimeException {
+
+    private static final long serialVersionUID = -3677745201173503960L;
 
     private final String key;
 
