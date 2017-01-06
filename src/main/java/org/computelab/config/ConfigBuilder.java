@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.google.common.collect.ImmutableList;
+
+/**
+ * Note this builder is not thread-safe.
+ */
 public final class ConfigBuilder {
 
     private final List<Config> configs = new ArrayList<>();
@@ -67,6 +72,6 @@ public final class ConfigBuilder {
     }
 
     public Config build(final String configName) {
-        return new StackedConfig(configName, configs);
+        return new StackedConfig(configName, ImmutableList.copyOf(configs));
     }
 }
