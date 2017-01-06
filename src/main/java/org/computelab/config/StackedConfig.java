@@ -3,7 +3,6 @@ package org.computelab.config;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +19,7 @@ final class StackedConfig extends AbstractConfig {
         super(name);
         checkNotNull(configs);
         checkArgument(configs.size() > 0);
-        this.configs = Collections.unmodifiableList(configs);
+        this.configs = configs;
         logger.info("Stacking configs [" + String.join(", ",
                 this.configs.stream().map(
                         config -> config.name()
