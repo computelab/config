@@ -2,42 +2,84 @@
 
 [![Build Status](https://travis-ci.org/computelab/config.svg?branch=master)](https://travis-ci.org/computelab/config) [![codecov](https://codecov.io/gh/computelab/config/branch/master/graph/badge.svg)](https://codecov.io/gh/computelab/config)
 
-### Overlaid configuration
+## Usage
 
-Configuration can be defined in many places. Can be passed on command-line as
-system properties. Can be read from environment variables. Can be read from
-a hidden file in the current user's home directory. Or can be read from source
-code.
+Suppose we have an app code-named "Foo". Foo runs as a web API that binds to a *port*. Under the hood, Foo uses another web API called "Bar" which has an *endpoint* and requires an *access token* to access it.
 
-In the source code, dummy values.
-In user's home directory, for local development.
-Environment variables and system properties, are for deployed.
+Foo has the following configurable items: a port number, Bar's endpoint, and Bar's access token.
 
-Stacked together. [Example]
+### DefaultConfigBuilder
 
-### Comma-delimited key
+The easiest is to use `DefaultConfigBuilder`.
 
-Can be read flattened from Java properties.
-The same key can be read as JSON path. This is handled transparently.
+```java
+// Build a config using an app name
+// The app name will be used for the hidden folder uder the user's home directory
+final String appName = "foo";
+final Config config = new DefaultConfigBuilder(appName).build();
 
-[Example here]
+// Read the config entries
+final int port = config.getAsInt("port");
+final String barEndpoint = config.get("bar.endpoint");
+final String barToken = config.get("bar.token");
+```
 
-### DefaultConfig
+In order for this to work, configure the Foo app like below,
 
-##### Usage Patterns
+#### 1. Source code resource
 
-1. Write your own Config with the list of keys. To reduce the chance of errors and get intellisense on editors.
-2. Check keys on loading so that errors are discovered quickly.
-3. Cache the values and add a reload() method if necessary.
-4. Load config remotely.
+In the source code, under `src/main/resources`, add a file `app.properties` with the following content,
 
-### ConfigBuilder
+    port = 8080
+    bar.endpoint = http://localhost:8089/
+    bar.token = dummy
 
-### Light-weight ConfigReader
+The values in this `app.properties` are default values. Ideally the values are sufficient to launch the app locally.
 
-### Design Principles
+Note sensitive data should be avoided here. For example, token is given a dummy value here. In a local stack, this token may be checked against the same dummy value or may not be checked at all.
 
-1. No annotations
-2. Miniml dependencies. For example, we do not expose any Gson objects on the interface. Instead they are wrapped in and handled transparently for you.
-3. Stateless. We do not store any config data. It is a reader -- every call reads realtime data. That opens up the possibility of changing config at runtime.
-4. No nulls. Two options are provided. You can either check a boolean flag or catch `ConfigEntryMissingException`.
+This configuration file is optional but is highly recommended. The goal is for every developer to run the code locally with zero custom configuration needed.
+
+#### 2. User's home directory
+
+In the user's home directory, create a hidden folder `.foo`. Make sure only the user can access the folder. In this hidden folder, create the file `app.properties`,
+
+    bar.endpoint = https://beta.bar.net:8089/
+    bar.token = 9C6B9F9B9DCB1
+
+Note that in this file, it overwrites the default values of `bar.endpoint` and `bar.token`.
+
+This file is optional. It is mainly for local integration test against remote resources.
+
+#### 3. Environment variables
+
+When the app is deployed, configuration values can be passed in as environment variables. This further overwrites values defined in the source code and in user's home directory. For example, a staging environment,
+
+    export BAR_ENDPOINT="https://staging.bar.net:8089/"
+    export BAR_TOKEN="3C53CD2D51F71"
+
+#### 4. System properties
+
+Alternatively, system properties can be passed to the VM on the `java` command. For example, set the port to 443,
+
+    java -jar foo.jar -Dport=443
+
+### Custom ConfigBuilder
+
+(To be written)
+
+### JSON ConfigBuilder
+
+(To be written)
+
+### Define your own config
+
+#### 1. Hide the keys as private constants
+
+#### 2. Refresh the config by providing a callback
+
+(More be written)
+
+### Lightweight ConfigReader
+
+(To be written)
