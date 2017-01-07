@@ -4,9 +4,9 @@
 
 ## Usage
 
-Suppose we have an app code-named "Foo". Foo runs as a web API that binds to a *port*. Under the hood, Foo uses another web API called "Bar" which has an *endpoint* and requires an *access token* to access it.
+Suppose we have an app code-named "Foo". Foo runs as a web API that binds to a *port*. Under the hood, Foo uses another web API, called "Bar", which has an *endpoint* and requires an *access token* to access it.
 
-Foo has the following configurable items: a port number, Bar's endpoint, and Bar's access token.
+Foo has the following configurable items: a port number, Bar's endpoint, and an access token to access Bar.
 
 ### DefaultConfigBuilder
 
@@ -34,7 +34,7 @@ In the source code, under `src/main/resources`, add a file `app.properties` with
     bar.endpoint = http://localhost:8089/
     bar.token = dummy
 
-The values in this `app.properties` are default values. Ideally the values are sufficient to launch the app locally.
+These are Java properties. Note the keys must match those specified in the code. The values in this `app.properties` are default values. Ideally the values are sufficient to launch the app locally.
 
 Note sensitive data should be avoided here. For example, token is given a dummy value here. In a local stack, this token may be checked against the same dummy value or may not be checked at all.
 
@@ -42,7 +42,7 @@ This configuration file is optional but is highly recommended. The goal is for e
 
 #### 2. User's home directory
 
-In the user's home directory, create a hidden folder `.foo`. Make sure only the user can access the folder. In this hidden folder, create the file `app.properties`,
+Each individual developer can have a custom configuration for the Foo app. In the user's home directory, create a hidden folder `.foo`. Make sure only the current user can access the folder and its content. In this hidden folder, create the file `app.properties`,
 
     bar.endpoint = https://beta.bar.net:8089/
     bar.token = 9C6B9F9B9DCB1
@@ -53,14 +53,16 @@ This file is optional. It is mainly for local integration test against remote re
 
 #### 3. Environment variables
 
-When the app is deployed, configuration values can be passed in as environment variables. This further overwrites values defined in the source code and in user's home directory. For example, a staging environment,
+When the app is deployed, configuration values can be passed in as environment variables. This further overwrites values defined in the source code and in user's home directory. For example, when deploying Foo to a staging environment, the staging environment can set the following environment variables,
 
     export BAR_ENDPOINT="https://staging.bar.net:8089/"
     export BAR_TOKEN="3C53CD2D51F71"
 
+This is usually where sensitive data are passed to the app. As shown here, we are passing in a real token to access Bar.
+
 #### 4. System properties
 
-Alternatively, system properties can be passed to the VM on the `java` command. For example, set the port to 443,
+Alternatively, system properties can be passed to the VM on the `java` command. For example, setting the port to 443,
 
     java -jar foo.jar -Dport=443
 
@@ -74,11 +76,37 @@ Alternatively, system properties can be passed to the VM on the `java` command. 
 
 ### Define your own config
 
-#### 1. Hide the keys as private constants
+#### 1. Hide the keys
+
+Tire of typing key names? Wrap `DefaultConfigBuilder` into your own config.
+
+```java
+public class FooConfig() {
+
+    private static final String APP_NAME = "foo";
+    private final Config config;
+
+    public FooConfig() {
+        config = new DefaultConfigBuilder(APP_NAME).build();
+    }
+
+    public int port() {
+        return config.getAsInt("port");
+    }
+
+    public String barEndpoint() {
+        return config.get("bar.endpoint");
+    }
+
+    public String barEndpoint() {
+        return config.get("bar.token");
+    }
+}
+```
 
 #### 2. Refresh the config by providing a callback
 
-(More be written)
+(To be written)
 
 ### Lightweight ConfigReader
 
