@@ -4,8 +4,6 @@
 
 ## Usage
 
-### Example app
-
 Suppose we have an app code-named "Foo". Foo runs as a web API that binds to a *port*. Under the hood, Foo uses another web API called "Bar" which has an *endpoint* and requires an *access token* to access it.
 
 Foo has the following configurable items: a port number, Bar's endpoint, and Bar's access token.
@@ -76,7 +74,11 @@ Alternatively, system properties can be passed to the VM on the `java` command. 
 
 ### Define your own config
 
-(To be written)
+#### 1. Hide the keys as private constants
+
+#### 2. Refresh the config by providing a callback
+
+(More be written)
 
 ### Lightweight ConfigReader
 
