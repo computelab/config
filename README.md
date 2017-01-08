@@ -78,7 +78,7 @@ Alternatively, system properties can be passed to the VM on the `java` command. 
 
 #### 1. Hide the keys
 
-Tire of typing key names? Wrap `DefaultConfigBuilder` into your own config.
+Tire of typing key names? Hide them by creating your own config type. The following example wraps `DefaultConfigBuilder` into FooConfig,
 
 ```java
 public class FooConfig() {
