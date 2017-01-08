@@ -14,7 +14,7 @@ The easiest is to use `DefaultConfigBuilder`.
 
 ```java
 // Build a config using an app name
-// The app name will be used for the hidden folder uder the user's home directory
+// The app name will be used for the hidden folder under the user's home directory
 final String appName = "foo";
 final Config config = new DefaultConfigBuilder(appName).build();
 
