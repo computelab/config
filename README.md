@@ -28,6 +28,8 @@ In order for this to work, configure the Foo app like below,
 
 #### 1. Source code resource
 
+This file is optional but strongly recommended.
+
 In the source code, under `src/main/resources`, add a file `app.properties` with the following content,
 
     port = 8080
@@ -41,6 +43,8 @@ Note sensitive data should be avoided here. For example, token is given a dummy 
 This configuration file is optional but is highly recommended. The goal is for every developer to run the code locally with zero custom configuration needed.
 
 #### 2. User's home directory
+
+This file is optional.
 
 Each individual developer can have a custom configuration for the Foo app. In the user's home directory, create a hidden folder `.foo`. Make sure only the current user can access the folder and its content. In this hidden folder, create the file `app.properties`,
 
