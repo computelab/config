@@ -28,6 +28,8 @@ In order for this to work, configure the Foo app like below,
 
 #### 1. Source code resource
 
+This file is optional but is strongly recommended.
+
 In the source code, under `src/main/resources`, add a file `app.properties` with the following content,
 
     port = 8080
