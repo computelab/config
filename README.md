@@ -108,6 +108,8 @@ public class FooConfig() {
 
 #### 2. Refresh the config by providing a callback
 
+Example, when changing config flags at runtime.
+
 (To be written)
 
 ### Lightweight ConfigReader
