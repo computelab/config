@@ -3,6 +3,7 @@ plugins {
     id 'findbugs'
     id 'pmd'
     id 'jacoco'
+    id 'signing'
 }
 
 /*** Project ***/
@@ -57,4 +58,10 @@ jacocoTestReport {
     reports {
         xml.enabled = true
     }
+}
+
+/*** Signing ***/
+
+signing {
+    sign configurations.archives
 }
