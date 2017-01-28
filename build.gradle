@@ -1,9 +1,9 @@
 plugins {
     id 'java'
     id 'findbugs'
-    id 'jdepend'
     id 'pmd'
     id 'jacoco'
+    id 'signing'
 }
 
 /*** Project ***/
@@ -47,13 +47,6 @@ tasks.withType(FindBugs) {
     }
 }
 
-tasks.withType(JDepend) {
-    reports {
-        xml.enabled = false
-        text.enabled = true
-    }
-}
-
 tasks.withType(Pmd) {
     reports {
         xml.enabled = false
@@ -65,4 +58,10 @@ jacocoTestReport {
     reports {
         xml.enabled = true
     }
+}
+
+/*** Signing ***/
+
+signing {
+    sign configurations.archives
 }
