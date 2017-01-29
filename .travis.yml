@@ -9,14 +9,12 @@ before_install:
        -in secring.gpg.enc -out secring.gpg -d;
    fi'
 script:
-- 'if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
-     gradle clean check jacocoTestReport;
-   fi'
+- 'gradle clean check jacocoTestReport'
+after_success:
+- 'bash <(curl -s https://codecov.io/bash)'
 - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-     gradle clean build jacocoTestReport
+     gradle clean build publish
        -Psigning.keyId=${SIGNING_KEY_ID}
        -Psigning.password=${SIGNING_PASSWORD}
        -Psigning.secretKeyRingFile=${SIGNING_SECRET_KEY_RING_FILE};
    fi'
-after_success:
-- 'bash <(curl -s https://codecov.io/bash)'
