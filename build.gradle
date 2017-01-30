@@ -4,14 +4,14 @@ plugins {
     id 'pmd'
     id 'jacoco'
     id 'signing'
+    id 'maven-publish'
 }
 
 /*** Project ***/
 
 group = 'org.computelab'
 ext.name = 'config'
-version = '0.1.' + (new Date()).format(
-        'yyyyMMddHHmm', TimeZone.getTimeZone("UTC"))
+version = '0.1.0-SNAPSHOT'
 
 /*** Java ***/
 
@@ -64,4 +64,23 @@ jacocoTestReport {
 
 signing {
     sign configurations.archives
+}
+
+/*** Maven Publishing ***/
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+            credentials {
+                username "${System.env.OSSRH_USR}"
+                password "${System.env.OSSRH_PWD}"
+            }
+        }
+    }
 }
