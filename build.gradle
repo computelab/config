@@ -76,10 +76,10 @@ publishing {
     }
     repositories {
         maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
+            url OSSRH_URL
             credentials {
-                username "${System.env.OSSRH_USR}"
-                password "${System.env.OSSRH_PWD}"
+                username OSSRH_USR
+                password OSSRH_PWD
             }
         }
     }
