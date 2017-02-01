@@ -6,10 +6,9 @@ script:
 after_success:
 - 'bash <(curl -s https://codecov.io/bash)'
 - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
-     # Set OSSRH_URL by branch
-     OSSRH_URL="${OSSRH_URL_DEVELOP}";
-     if [ "{TRAVIS_BRANCH}" = "release" ]; then
-       OSSRH_URL="${OSSRH_URL_RELEASE}";
+     # Set OSSRH_URL to staging if the branch is staging
+     if [ "{TRAVIS_BRANCH}" = "staging" ]; then
+       ORG_GRADLE_PROJECT_OSSRH_URL="${ORG_GRADLE_PROJECT_OSSRH_URL_STAGING}";
      fi
      # Decrypt key ring which holds the key for signing
      openssl aes-256-cbc
@@ -20,6 +19,5 @@ after_success:
      gradle clean build publish
        -Psigning.keyId="${SIGNING_KEY_ID}"
        -Psigning.password="${SIGNING_PASSWORD}"
-       -Psigning.secretKeyRingFile="${SIGNING_SECRET_KEY_RING_FILE}"
-       -POSSRH_URL="${OSSRH_URL}";
+       -Psigning.secretKeyRingFile="${SIGNING_SECRET_KEY_RING_FILE}";
    fi'
