@@ -8,7 +8,7 @@ after_success:
 - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
      # Set OSSRH_URL to staging if the branch is staging
      if [ "{TRAVIS_BRANCH}" = "staging" ]; then
-       ORG_GRADLE_PROJECT_OSSRH_URL="${ORG_GRADLE_PROJECT_OSSRH_URL_STAGING}";
+       OSSRH_URL="${OSSRH_URL_STAGING}";
      fi
      # Decrypt key ring which holds the key for signing
      openssl aes-256-cbc
