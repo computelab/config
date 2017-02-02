@@ -7,11 +7,29 @@ plugins {
     id 'maven-publish'
 }
 
-/*** Project ***/
+/*** Project Properties ***/
+
+/*
+ * Notes
+ * ===================================================
+ * 1) Project.name is already reserved for the name of
+ *    the project directory. Thus adding an extra
+ *    property, ext.name, for project name.
+ * 2) By default, version number has the "-SNAPSHOT"
+ *    suffix. The "-SNAPSHOT" suffix is required for
+ *    for publishing to the snapshot repo. To publish
+ *    to the staging repo, set the staging property
+ *    to "true".
+ */
 
 group = 'org.computelab'
 ext.name = 'config'
-version = '0.1.0-SNAPSHOT'
+version = '0.1.0'
+ext.snapshot = '-SNAPSHOT'
+
+version = staging ? version : version + ext.snapshot
+
+println 'Version is ' + version
 
 /*** Java ***/
 
@@ -76,7 +94,10 @@ publishing {
     }
     repositories {
         maven {
-            url "${System.env.OSSRH_URL}"
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+            if (staging) {
+                url 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+            }
             credentials {
                 username "${System.env.OSSRH_USR}"
                 password "${System.env.OSSRH_PWD}"
