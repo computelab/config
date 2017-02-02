@@ -6,9 +6,9 @@ script:
 after_success:
 - 'bash <(curl -s https://codecov.io/bash)'
 - 'if [ "${TRAVIS_BRANCH}" = "staging" ]; then
-     STAGING="true";
+     export STAGING="true";
    else
-     STAGING="";
+     export STAGING="";
    fi'
 - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
      openssl aes-256-cbc
