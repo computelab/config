@@ -25,11 +25,7 @@ plugins {
 group = 'org.computelab'
 ext.name = 'config'
 version = '0.1.0'
-ext.snapshot = '-SNAPSHOT'
-
-version = staging ? version : version + ext.snapshot
-
-println 'Version is ' + version
+version = staging ? version : version + '-SNAPSHOT'
 
 /*** Java ***/
 
