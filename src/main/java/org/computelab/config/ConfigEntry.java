@@ -9,12 +9,12 @@ package org.computelab.config;
 public interface ConfigEntry<K, V> {
 
     /**
-     * The key of the config entry.
+     * @return the key of the config entry
      */
     K key();
 
     /**
-     * The value of the config entry.
+     * @return the value of the config entry.
      */
     V value();
 }

@@ -29,12 +29,6 @@ version = staging ? version : version + '-SNAPSHOT'
 
 /*** Java ***/
 
-jar {
-    group = project.group
-    baseName = project.ext.name
-    version = project.version
-}
-
 repositories {
     mavenCentral()
 }
@@ -50,6 +44,16 @@ dependencies {
     testCompile 'org.apache.commons:commons-lang3:' + commons
     testRuntime 'ch.qos.logback:logback-core:' + logback
     testRuntime 'ch.qos.logback:logback-classic:' + logback
+}
+
+jar {
+    group = project.group
+    baseName = project.ext.name
+    version = project.version
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
 }
 
 /*** Code Quality Tools ***/
@@ -86,6 +90,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            artifact javadocJar {
+                classifier 'javadoc'
+            }
         }
     }
     repositories {
