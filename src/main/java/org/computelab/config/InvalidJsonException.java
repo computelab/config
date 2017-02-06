@@ -23,7 +23,7 @@ public class InvalidJsonException extends RuntimeException {
     }
 
     /**
-     * @param json the JSON string causing this exception
+     * @return the JSON string causing this exception
      */
     public String getJson() {
         return json;

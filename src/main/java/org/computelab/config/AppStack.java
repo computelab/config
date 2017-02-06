@@ -7,7 +7,7 @@ package org.computelab.config;
 public interface AppStack {
 
     /**
-     * The name of this application stack.
+     * @return the name of this application stack
      */
     String name();
 }
