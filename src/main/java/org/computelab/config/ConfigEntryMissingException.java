@@ -20,7 +20,7 @@ public final class ConfigEntryMissingException extends RuntimeException {
     }
 
     /**
-     * The key for which the config entry is missing.
+     * @return the key for which the config entry is missing.
      */
     public String key() {
         return key;

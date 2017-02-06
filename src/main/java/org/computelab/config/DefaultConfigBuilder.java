@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Builds a <code>Config</code> that reads the following sources in order:
- * <p>
  * <ol>
  * <li> System properties which are usually passed on command-line as -D parameters.
  * <li> Environment variables.
