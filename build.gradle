@@ -56,6 +56,10 @@ task javadocJar(type: Jar) {
     from javadoc
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+}
+
 /*** Code Quality Tools ***/
 
 tasks.withType(FindBugs) {
@@ -92,6 +96,9 @@ publishing {
             from components.java
             artifact javadocJar {
                 classifier 'javadoc'
+            }
+            artifact sourcesJar {
+                classifier = 'sources'
             }
         }
     }
