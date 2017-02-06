@@ -93,6 +93,28 @@ signing {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            pom.withXml {
+                asNode().children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    name 'config'
+                    description 'Configuration in plain Java'
+                    url 'https://github.com/computelab/config'
+                    licenses {
+                        license {
+                            name 'The MIT License'
+                            url 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+                    scm {
+                        url 'https://github.com/computelab/config.git'
+                    }
+                    developers {
+                        developer {
+                            id 'neurite'
+                        }
+                    }
+                }
+            }
             from components.java
             artifact javadocJar {
                 classifier 'javadoc'
