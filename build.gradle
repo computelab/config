@@ -84,6 +84,13 @@ jacocoTestReport {
 
 /*** Signing ***/
 
+// Associate the artifacts with the archives configuration
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
 signing {
     sign configurations.archives
 }
