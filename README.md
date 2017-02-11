@@ -8,15 +8,15 @@ Suppose we have an app code-named "Foo". Foo runs as a web API that binds to a *
 
 Foo has the following configurable items: a port number, Bar's endpoint, and an access token to access Bar.
 
-### DefaultConfigBuilder
+### DefaultConfig
 
-The easiest is to use `DefaultConfigBuilder`.
+The easiest is to use `DefaultConfig`.
 
 ```java
 // Build a config using an app name
 // The app name will be used for the hidden folder under the user's home directory
 final String appName = "foo";
-final Config config = new DefaultConfigBuilder(appName).build();
+final Config config = DefaultConfig.create(appName);
 
 // Read the config entries
 final int port = config.getAsInt("port");
