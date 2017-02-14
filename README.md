@@ -14,7 +14,7 @@ Add a dependency in `pom.xml`,
 </dependency>
 ```
 
-Or in `build.gradle`,
+Or, if you use Gradle, in `build.gradle`,
 
 ```
 compile group: 'org.computelab', name: 'config', version: '0.2.0'
