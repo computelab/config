@@ -1,6 +1,24 @@
 # config
 
-[![Build Status](https://travis-ci.org/computelab/config.svg?branch=master)](https://travis-ci.org/computelab/config) [![codecov](https://codecov.io/gh/computelab/config/branch/master/graph/badge.svg)](https://codecov.io/gh/computelab/config)
+[![Build Status](https://travis-ci.org/computelab/config.svg?branch=master)](https://travis-ci.org/computelab/config) [![codecov](https://codecov.io/gh/computelab/config/branch/master/graph/badge.svg)](https://codecov.io/gh/computelab/config) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.computelab/config/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.computelab/config)
+
+## Install
+
+Add a dependency in `pom.xml`,
+
+```
+<dependency>
+    <groupId>org.computelab</groupId>
+    <artifactId>config</artifactId>
+    <version>0.2.0</version>
+</dependency>
+```
+
+Or in `build.gradle`,
+
+```
+compile group: 'org.computelab', name: 'config', version: '0.2.0'
+```
 
 ## Usage
 
@@ -13,8 +31,9 @@ Foo has the following configurable items: a port number, Bar's endpoint, and an 
 The easiest is to use `DefaultConfig`.
 
 ```java
-// Build a config using an app name
 // The app name will be used for the hidden folder under the user's home directory
+// In this case, ~/.foo/app.properties is the config file in the user's home for "foo" 
+// This file is optional though. Details later
 final String appName = "foo";
 final Config config = DefaultConfig.create(appName);
 
@@ -40,7 +59,7 @@ These are Java properties. Note the keys must match those specified in the code.
 
 Note sensitive data should be avoided here. For example, token is given a dummy value here. In a local stack, this token may be checked against the same dummy value or may not be checked at all.
 
-This configuration file is optional but is highly recommended. The goal is for every developer to run the code locally with zero custom configuration needed.
+This configuration file is optional but is highly recommended. Remember the goal is for every developer to run the code locally with zero custom configuration needed.
 
 #### 2. User's home directory
 
