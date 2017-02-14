@@ -4,7 +4,7 @@
 
 ## Install
 
-Add a dependency in `pom.xml`,
+For Maven, add a dependency in `pom.xml`,
 
 ```
 <dependency>
