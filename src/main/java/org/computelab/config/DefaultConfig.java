@@ -99,8 +99,8 @@ public final class DefaultConfig {
         private Properties getFromHome() {
             final String userHome = System.getProperty("user.home");
             final String appHome = "." + appName;
-            final String configFilePath = String.join(File.separator,  userHome, appHome, configFile);
-            try (final FileInputStream inputStream = new FileInputStream(configFilePath);) {
+            final String configFilePath = String.join(File.separator, userHome, appHome, configFile);
+            try (final FileInputStream inputStream = new FileInputStream(configFilePath)) {
                 return getProperties(inputStream);
             } catch (final FileNotFoundException ex) {
                 logger.warn("Missing config file " + configFilePath + ". Skipping it...");
@@ -121,7 +121,7 @@ public final class DefaultConfig {
             } catch (final IOException ex) {
                 logger.warn("Error reading resource " + configFile + ". Skipping it...", ex);
                 return null;
-            } 
+            }
         }
 
         private Properties getProperties(final InputStream inputStream) throws IOException {
