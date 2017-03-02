@@ -99,7 +99,7 @@ Alternatively, system properties can be passed to the VM on the `java` command. 
 
 #### 1. Hide the keys
 
-Tire of typing key names? Hide them by creating your own config type. The following example wraps `DefaultConfigBuilder` into FooConfig,
+Tire of typing key names? Hide them by creating your own config type. The following example wraps `DefaultConfig` into FooConfig,
 
 ```java
 public class FooConfig() {
@@ -108,7 +108,7 @@ public class FooConfig() {
     private final Config config;
 
     public FooConfig() {
-        config = new DefaultConfigBuilder(APP_NAME).build();
+        config = DefaultConfig.create(APP_NAME);
     }
 
     public int port() {
@@ -119,7 +119,7 @@ public class FooConfig() {
         return config.get("bar.endpoint");
     }
 
-    public String barEndpoint() {
+    public String barToken() {
         return config.get("bar.token");
     }
 }
@@ -127,7 +127,7 @@ public class FooConfig() {
 
 #### 2. Refresh the config by providing a callback
 
-Example, when changing config flags at runtime.
+Example, when changing config flags at runtime. Configs are stateless.
 
 (To be written)
 
