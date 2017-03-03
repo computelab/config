@@ -87,19 +87,9 @@ Alternatively, system properties can be passed to the VM on the `java` command. 
 
     java -jar foo.jar -Dport=443
 
-### Custom ConfigBuilder
-
-(To be written)
-
-### JSON ConfigBuilder
-
-(To be written)
-
 ### Define your own config
 
-#### 1. Hide the keys
-
-Tire of typing key names? Hide them by creating your own config type. The following example wraps `DefaultConfig` into FooConfig,
+Tired of typing key names? Hide them by creating your own config type. The following example wraps `DefaultConfig` into FooConfig,
 
 ```java
 public class FooConfig() {
@@ -125,12 +115,4 @@ public class FooConfig() {
 }
 ```
 
-#### 2. Refresh the config by providing a callback
-
-Example, when changing config flags at runtime. Configs are stateless.
-
-(To be written)
-
-### Lightweight ConfigReader
-
-(To be written)
+Once you have the FooConfig defined, it can be injected using your favorite framework.
