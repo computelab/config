@@ -22,8 +22,10 @@ import org.slf4j.LoggerFactory;
  * <li> System properties, which are usually passed as -D parameters on command-line.
  * <li> Environment variables.
  * <li> The properties file in the app's home. The app's home is the hidden folder
- *      "~/.[app]" in the user's home. This file is optional.
- * <li> The properties file as a source code resource. Optional.
+ *      "~/.[app]" in the user's home. By default, the file is "app.properties".
+ *      Thus the complete file path is "~/.[app]/app.properties". This file is optional.
+ * <li> The properties file as a source code resource. By default, the file is "app.properties".
+ *      This file is optional.
  * </ol>
  */
 public final class DefaultConfig {
@@ -50,10 +52,15 @@ public final class DefaultConfig {
 
     /**
      * Creates a default config with the specified app name and the specified config
-     * file name. The app name will be used to located the app's home directory. The
+     * file name.
+     * <p>
+     * The app name will be used to located the app's home directory. The
      * app's home is the hidden folder "~/.[app]" in the user's home. For example,
-     * if the app name is "foo", the app's home will be "~/.foo" in the user's home
-     * directory. This directory will be searched for the specified properties file.
+     * if the app name is "foo", the app's home will be "~/.foo" in the user's home.
+     * This directory will be searched for the specified properties file.
+     * <p>
+     * Instead of the default "app.properties" file, you can specify your own
+     * config file here.
      *
      * @param appName the name of the app that is used to locate the app's home
      * @param configFile the name of the config file
