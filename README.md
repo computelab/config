@@ -33,7 +33,7 @@ The easiest is to use `DefaultConfig`.
 ```java
 // The app name will be used for the hidden folder under the user's home directory
 // In this case, ~/.foo/app.properties is the config file in the user's home for "foo" 
-// This file is optional though. Details later
+// This file is optional though. Details later.
 final String appName = "foo";
 final Config config = DefaultConfig.create(appName);
 
@@ -70,7 +70,7 @@ Each individual developer can have a custom configuration for the Foo app. In th
 
 Note that in this file, it overwrites the default values of `bar.endpoint` and `bar.token`.
 
-This file is optional. It is mainly for local integration test against remote resources.
+This file is optional. It is mainly for local integration test against local or remote resources.
 
 #### 3. Environment variables
 
