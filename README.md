@@ -6,7 +6,7 @@
 
 For Maven, add a dependency in `pom.xml`,
 
-```
+```xml
 <dependency>
     <groupId>org.computelab</groupId>
     <artifactId>config</artifactId>
@@ -31,6 +31,9 @@ Foo has the following configurable items: a port number, Bar's endpoint, and an 
 The easiest is to use `DefaultConfig`.
 
 ```java
+import org.computelab.config.Config;
+import org.computelab.config.DefaultConfig;
+
 // The app name will be used for the hidden folder under the user's home directory
 // In this case, ~/.foo/app.properties is the config file in the user's home for "foo" 
 // This file is optional though. Details later.
@@ -51,9 +54,11 @@ This file is optional but is strongly recommended.
 
 In the source code, under `src/main/resources`, add a file `app.properties` with the following content,
 
-    port = 8080
-    bar.endpoint = http://localhost:8089/
-    bar.token = dummy
+```bash
+port = 8080
+bar.endpoint = http://localhost:8089/
+bar.token = dummy
+```
 
 These are Java properties. Note the keys must match those specified in the code. The values in this `app.properties` are default values. Ideally the values are sufficient to launch the app locally.
 
@@ -65,8 +70,10 @@ This configuration file is optional but is highly recommended. Remember the goal
 
 Each individual developer can have a custom configuration for the Foo app. In the user's home directory, create a hidden folder `.foo`. Make sure only the current user can access the folder and its content. In this hidden folder, create the file `app.properties`,
 
-    bar.endpoint = https://beta.bar.net:8089/
-    bar.token = 9C6B9F9B9DCB1
+```bash
+bar.endpoint = https://beta.bar.net:8089/
+bar.token = 9C6B9F9B9DCB1
+```
 
 Note that in this file, it overwrites the default values of `bar.endpoint` and `bar.token`.
 
@@ -76,8 +83,10 @@ This file is optional. It is mainly for local integration test against local or 
 
 When the app is deployed, configuration values can be passed in as environment variables. This further overwrites values defined in the source code and in user's home directory. For example, when deploying Foo to a staging environment, the staging environment can set the following environment variables,
 
-    export BAR_ENDPOINT="https://staging.bar.net:8089/"
-    export BAR_TOKEN="3C53CD2D51F71"
+```bash
+export BAR_ENDPOINT="https://staging.bar.net:8089/"
+export BAR_TOKEN="3C53CD2D51F71"
+```
 
 This is usually where sensitive data are passed to the app. As shown here, we are passing in a real token to access Bar.
 
@@ -85,13 +94,18 @@ This is usually where sensitive data are passed to the app. As shown here, we ar
 
 Alternatively, system properties can be passed to the VM on the `java` command. For example, setting the port to 443,
 
-    java -jar foo.jar -Dport=443
+```bash
+java -jar foo.jar -Dport=443
+```
 
 ### Define your own config
 
 Tired of typing key names? Hide them by creating your own config type. The following example wraps `DefaultConfig` into FooConfig,
 
 ```java
+import org.computelab.config.Config;
+import org.computelab.config.DefaultConfig;
+
 public class FooConfig() {
 
     private static final String APP_NAME = "foo";
