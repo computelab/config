@@ -10,14 +10,14 @@ For Maven, add a dependency in `pom.xml`,
 <dependency>
     <groupId>org.computelab</groupId>
     <artifactId>config</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
 </dependency>
 ```
 
 Or, if you use Gradle, in `build.gradle`,
 
 ```
-compile group: 'org.computelab', name: 'config', version: '0.2.0'
+compile group: 'org.computelab', name: 'config', version: '0.2.1'
 ```
 
 ## Usage
